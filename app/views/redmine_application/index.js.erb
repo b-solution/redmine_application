@@ -1,0 +1,10 @@
+$('#rapp_id_<%= @ra.id %>').parents('tr').removeClass();
+<% klass= ''
+         if @ra.status == 'Rejected'
+           klass = '#ffe3e3;'
+         end
+         if @ra.status == 'Accepted'
+           klass = '#dfffdf;'
+         end
+      %>
+$('#rapp_id_<%= @ra.id %>').parents('tr').css('background-color', '<%= klass%>');

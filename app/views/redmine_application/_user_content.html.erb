@@ -1,0 +1,43 @@
+<table class="list">
+  <thead>
+  <tr>
+    <th>Suggested roles</th>
+    <th>Date</th>
+    <th>Comment</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @rapp.each do |ra| %>
+      <% klass= ''
+         if ra.status == 'Rejected'
+           klass = 'background-color: #ffe3e3;'
+         end
+         if ra.status == 'Accepted'
+           klass = ' background-color: #dfffdf;'
+         end
+      %>
+      <tr style="<%= klass %>">
+        <td hidden><%= ra.id %></td>
+        <td><%= ra.role %></td>
+        <td><%= ra.created_at.to_date %></td>
+        <td><%= ra.comment %></td>
+        <td>
+          <%= ra.status %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<h3>
+  Submit an application
+</h3>
+<%= form_tag 'suggest' do %>
+    Role: <%= select_tag :role_id, options_for_select(@roles) %>
+    <br/>
+    Comment:
+    <%= text_field_tag :comment %>
+    <%= submit_tag :submit %>
+
+<% end %>

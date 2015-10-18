@@ -1,0 +1,8 @@
+<h2>Application</h2>
+<% if User.current.admin %>
+    <%= render partial: 'admin_content' %>
+<% else %>
+    <% if User.current.logged? %>
+        <%= render partial: 'user_content' %>
+    <% end %>
+<% end %>
