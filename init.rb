@@ -7,9 +7,9 @@ Redmine::Plugin.register :redmine_application do
   author_url 'http://github.com/bilel-kedidi'
 
   settings :default => {
-         'cp'    => 'Project stage',
-         'value' => 'Initiative'
-     }#, :partial => 'redmine_application/setting'
+               'cp'    => 'Project stage',
+               'value' => 'Initiative'
+           }#, :partial => 'redmine_application/setting'
 
 
   permission :view_application, :redmine_application => :index, :public=> true
@@ -35,7 +35,11 @@ Rails.application.config.to_prepare do
           value = ""
           settings = Setting.send "plugin_redmine_application"
           if project
-            value = project.custom_field_values.select{|cfv| cfv.custom_field.name == settings['cp']}.first.value
+            begin
+              value = project.custom_field_values.select{|cfv| cfv.custom_field.name == settings['cp']}.first.value
+            rescue
+              value = ""
+            end
           end
           menu_items_for(menu, project) do |node|
             if node.children.present? || !node.child_menus.nil?
