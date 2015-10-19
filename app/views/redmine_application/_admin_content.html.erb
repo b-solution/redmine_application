@@ -6,6 +6,7 @@
     <th>Date</th>
     <th>Comment</th>
     <th>Status</th>
+    <th>Group</th>
     <th>Action</th>
 
   </tr>
@@ -29,6 +30,7 @@
         <td class="status">
           <%= select_tag :status, options_for_select([['', ''],['Accepted', 'Accepted'],['Rejected','Rejected']], ra.status ) %>
         </td>
+        <td><%= ra.user.groups.present? ? ra.user.groups.first.to_s : '' %></td>
         <td><%= button_tag :save, :class=> 'submit_rapp' %></td>
       </tr>
   <% end %>
